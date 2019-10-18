@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
         //load du lieu tu database
         loadQuery("%")
-
+        noteListView.emptyView = emptyView
     }
 
     fun loadQuery(title: String) {

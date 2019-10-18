@@ -41,15 +41,27 @@
                     android:textStyle="bold"
                     android:textSize="20sp"/>
 
-                <EditText
+<!--                <EditText-->
+<!--                    android:id="@+id/descEdit"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:gravity="start"-->
+<!--                    android:hint="Nhập nội dung ở đây..."-->
+<!--                    android:layout_height="0dp"-->
+<!--                    android:background="@drawable/mainbackground"-->
+<!--                    android:minHeight="0dp"-->
+<!--                    android:padding="10dp" />-->
+
+                <com.chinalwb.are.AREditor
                     android:id="@+id/descEdit"
                     android:layout_width="match_parent"
-                    android:gravity="start"
-                    android:hint="Nhập nội dung ở đây..."
                     android:layout_height="wrap_content"
+                    android:gravity="start"
                     android:background="@drawable/mainbackground"
                     android:minHeight="300dp"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    />
+
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -83,10 +95,6 @@
                         android:hint="code, work, ..."
                         android:layout_width="match_parent"
                         android:layout_height="50dp"/>
-
-
-
-
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

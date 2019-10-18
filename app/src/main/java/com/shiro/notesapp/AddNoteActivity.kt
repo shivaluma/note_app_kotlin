@@ -14,11 +14,14 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import android.util.Log
+import com.chinalwb.are.AREditor
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 import kotlinx.android.synthetic.main.activity_add_note.*
+
 import java.lang.Exception
+import java.util.*
 
 
 class AddNoteActivity : AppCompatActivity() {
@@ -33,15 +36,17 @@ class AddNoteActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_note)
 
 
+        descEdit.setExpandMode(AREditor.ExpandMode.FULL)
+        descEdit.setHideToolbar(false)
+        descEdit.setToolbarAlignment(AREditor.ToolbarAlignment.BOTTOM)
 
         try {
             val bundle: Bundle = intent.extras!!
             id = bundle.getInt("IDExtra",0)
             if (id != 0) {
-                descEdit.setText(bundle.getString("DescExtra"))
+                descEdit.fromHtml(bundle.getString("DescExtra")!!)
                 tagsInput.setText(bundle.getString("TagListExtra"))
                 lastModifiedTextView.text = ("Lần chỉnh sửa cuối : " + bundle.getString("LastModExtra"))
-
             }
         }
         catch (ex:Exception){}
@@ -67,13 +72,17 @@ class AddNoteActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+
+
     fun addNewNoteFunc() {
         var dbManager = DbManager(this)
         var values = ContentValues()
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")
         val formatted = current.format(formatter)
-        values.put("Description", descEdit.text.toString())
+
+        values.put("Description", descEdit.html.toString())
+
         values.put("Datetime", formatted)
         var tagArr = tagsInput.text.toString()
         if (tagArr.isEmpty()) {
