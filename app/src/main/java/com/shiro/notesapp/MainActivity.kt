@@ -5,16 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.util.Log
 import android.view.*
 import android.widget.BaseAdapter
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.row.*
 import kotlinx.android.synthetic.main.row.view.*
-import kotlinx.android.synthetic.main.tagchip.view.*
-import java.util.*
 import kotlin.collections.ArrayList
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -23,22 +17,6 @@ import android.view.ViewGroup
 import android.widget.SearchView
 
 import androidx.recyclerview.widget.LinearLayoutManager
-import android.widget.Toast
-import androidx.core.app.ComponentActivity
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-
-
-
-
-
-
-
-
-
-
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -54,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun loadQuery(title: String) {
-        var dbManager = DbManager(this)
+        var dbManager = NoteDB(this)
         val projections = arrayOf("ID","Description","Taglist", "Datetime")
         val selectionArgs = arrayOf(title)
         val cursor = dbManager.query(projections, "Description Like ?", selectionArgs,"ID DESC")
@@ -65,8 +43,6 @@ class MainActivity : AppCompatActivity() {
                 val Description = cursor.getString(cursor.getColumnIndex("Description"))
                 val TagList = cursor.getString(cursor.getColumnIndex("Taglist"))
                 val DateTime = cursor.getString(cursor.getColumnIndex("Datetime"))
-
-
 
                 listNotes.add(Note(ID,Description,TagList,DateTime))
             }
@@ -87,7 +63,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun loadQueryFromSearch(title: String) {
-        var dbManager = DbManager(this)
+        var dbManager = NoteDB(this)
         val projections = arrayOf("ID","Description","Taglist", "Datetime")
 
         val tagList = ArrayList<String>()
@@ -219,7 +195,7 @@ class MainActivity : AppCompatActivity() {
 
             // delete
             myView.removeBtn.setOnClickListener {
-                var dbManager = DbManager(this.context!!)
+                var dbManager = NoteDB(this.context!!)
                 val selectionArgs = arrayOf(myNote.ID.toString())
                 dbManager.delete("ID=?",selectionArgs)
                 loadQuery("%")

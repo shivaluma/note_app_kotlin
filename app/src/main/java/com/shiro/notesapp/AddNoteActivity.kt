@@ -3,17 +3,12 @@ package com.shiro.notesapp
 
 
 import android.content.ContentValues
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
-import android.util.Log
 import com.chinalwb.are.AREditor
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -21,14 +16,12 @@ import java.time.format.DateTimeFormatter
 import kotlinx.android.synthetic.main.activity_add_note.*
 
 import java.lang.Exception
-import java.util.*
 
 
 class AddNoteActivity : AppCompatActivity() {
 
 
     var dbTable = "NoteTable"
-
     var id = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,7 +58,7 @@ class AddNoteActivity : AppCompatActivity() {
             // Handle item selection
             when (item.itemId) {
                 R.id.app_bar_confirm -> {
-                    addNewNoteFunc()
+                    addNewNoteToDB()
                 }
             }
         }
@@ -74,8 +67,8 @@ class AddNoteActivity : AppCompatActivity() {
 
 
 
-    fun addNewNoteFunc() {
-        var dbManager = DbManager(this)
+    fun addNewNoteToDB() {
+        var dbManager = NoteDB(this)
         var values = ContentValues()
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")

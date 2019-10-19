@@ -8,7 +8,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteQueryBuilder
 import android.media.projection.MediaProjection
 
-class DbManager {
+class NoteDB {
     var dbName = "NoteDB"
     var dbTable = "NoteTable"
 

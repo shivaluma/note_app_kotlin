@@ -3,8 +3,7 @@ package com.shiro.notesapp
 import java.util.*
 import kotlin.collections.ArrayList
 import android.text.Html
-import android.util.Log
-import org.jsoup.Jsoup
+
 import androidx.core.text.HtmlCompat
 
 class Note(noteID:Int,noteDesc: String, tagList: String, noteEditTime:String) {
