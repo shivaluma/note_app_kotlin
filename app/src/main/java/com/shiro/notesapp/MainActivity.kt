@@ -131,6 +131,7 @@ class MainActivity : AppCompatActivity() {
 
         //search view
         var sv : SearchView = menu!!.findItem(R.id.app_bar_search).actionView as SearchView
+        sv.maxWidth = Int.MAX_VALUE
         var sm = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         sv.setSearchableInfo(sm.getSearchableInfo(componentName))
 
