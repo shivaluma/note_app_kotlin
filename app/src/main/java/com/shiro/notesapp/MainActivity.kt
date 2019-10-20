@@ -181,8 +181,20 @@ class MainActivity : AppCompatActivity() {
             //dua item vao
             var myView = layoutInflater.inflate(R.layout.row, null);
             var myNote = listNoteArr[position]
-            myView.titleItem.text = myNote.getNoteTitle()
-            myView.descItem.text =  myNote.getNoteDescription()
+            if (myNote.getNoteTitle().isEmpty()) {
+                myView.titleItem.text = "< Chưa có tiêu đề >"
+            }else {
+                myView.titleItem.text = myNote.getNoteTitle()
+            }
+
+            if (myNote.getNoteDescription().isEmpty()) {
+                myView.descItem.text =  "< Chưa có nội dung >"
+            }
+            else {
+                myView.descItem.text = myNote.getNoteDescription()
+            }
+
+
             myView.timeEdit.text = myNote.noteTime
 
             var TagArr = ArrayList<String>()
